@@ -1,0 +1,173 @@
+/* ฟอนต์ใหม่ */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: var(--background-color, #f4f6f9);
+    color: var(--text-color, #333);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1,
+h2 {
+    color: var(--highlight-color, #4a90e2);
+}
+
+h1 {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 1.75em;
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: var(--table-bg, #fff);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table,
+th,
+td {
+    border: none;
+}
+
+th {
+    background-color: var(--highlight-color, #4a90e2);
+    color: white;
+    font-weight: 600;
+    padding: 15px;
+    text-align: left;
+}
+
+td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+    background-color: var(--hover-color, #f1f1f1);
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: var(--text-color, #333);
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: var(--highlight-color, #4a90e2);
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: var(--button-hover-color, #357abd);
+    transform: translateY(-2px);
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 1.5em;
+    color: var(--highlight-color, #4a90e2);
+    text-align: center;
+}
+
+form {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: var(--form-bg, white);
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+#trainingData {
+    display: none;
+}
+
+/* ธีมมืด */
+body.dark {
+    --background-color: #1e1e1e;
+    --text-color: #e0e0e0;
+    --table-bg: #2a2a2a;
+    --hover-color: #3c3c3c;
+    --form-bg: #2a2a2a;
+    --highlight-color: #90caf9;
+    --button-hover-color: #64b5f6;
+}
+
+/* ปุ่มสลับธีมแบบ Toggle */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: var(--highlight-color, #4a90e2);
+}
+
+input:checked+.slider:before {
+    transform: translateX(26px);
+}

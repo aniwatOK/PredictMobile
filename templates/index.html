@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Price Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+    <h1>Mobile Price Prediction</h1>
+
+    <!-- ปุ่มสลับธีมแบบ Toggle -->
+    <label class="switch">
+        <input type="checkbox" id="toggleTheme">
+        <span class="slider"></span>
+    </label>
+
+    <!-- Toggle button for displaying the training data table -->
+    <button id="toggleTable">Show Training Data</button>
+
+    <!-- Display the training data table -->
+    <div id="trainingData" style="display: none;">
+        <h2>Training Data (First 100 Rows)</h2>
+        {{ tables[0]|safe }}
+    </div>
+
+    <!-- Form for user input and prediction -->
+    <h2>Enter Mobile Features for Prediction</h2>
+    <form id="predictionForm">
+        <label for="RAM">RAM (GB):</label>
+        <input type="number" name="RAM" required>
+
+        <label for="ROM">ROM (GB):</label>
+        <input type="number" name="ROM" required>
+
+        <label for="Mobile_Size">Mobile Size (inches):</label>
+        <input type="number" name="Mobile_Size" step="0.01" required>
+
+        <label for="Primary_Cam">Primary Camera (MP):</label>
+        <input type="number" name="Primary_Cam" required>
+
+        <label for="Selfi_Cam">Selfie Camera (MP):</label>
+        <input type="number" name="Selfi_Cam" required>
+
+        <label for="Battery_Power">Battery Power (mAh):</label>
+        <input type="number" name="Battery_Power" required>
+
+        <button type="submit">Predict Price</button>
+    </form>
+
+    <!-- Display the prediction result if it exists -->
+    <h2>Prediction Result</h2>
+    <div id="result"></div>
+
+    <script>
+        // Handle table toggle
+        document.getElementById('toggleTable').onclick = function () {
+            var trainingDataDiv = document.getElementById('trainingData');
+            trainingDataDiv.style.display = trainingDataDiv.style.display === 'none' || trainingDataDiv.style.display === '' ? 'block' : 'none';
+            this.textContent = trainingDataDiv.style.display === 'block' ? 'Hide Training Data' : 'Show Training Data';
+        };
+
+        // Handle form submission
+        document.getElementById('predictionForm').onsubmit = async function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+            const response = await fetch('/predict', {
+                method: 'POST',
+                body: new URLSearchParams(formData)
+            });
+
+            const result = await response.json();
+            document.getElementById('result').innerHTML = `Predicted Price: ${result.prediction}`;
+        };
+
+        // Handle theme toggle
+        document.getElementById('toggleTheme').onchange = function () {
+            document.body.classList.toggle('dark');
+        };
+    </script>
+</body>
+
+</html>
